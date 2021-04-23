@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, useHistory, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 import "./styles.scss";
 
-function App(props) {
+function App() {
   const logOut = () => {
-    localStorage.removeItem("token")
-    alert("Sign Out Successfully! Come Back Soon")
+    localStorage.removeItem("token");
+    alert("Sign Out Successfully! Come Back Soon!");
   }
   return (
     <Router>

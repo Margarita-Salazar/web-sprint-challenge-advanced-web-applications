@@ -9,6 +9,7 @@ test("Renders BubblePage without errors", () => {
 
 test("Fetches data and renders the bubbles on mounting", () => {
   // Finish this test
+  const {rerender} = render(<BubblePage />)
 });
 
 //Task List
