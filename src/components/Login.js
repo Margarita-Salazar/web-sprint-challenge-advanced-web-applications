@@ -10,11 +10,13 @@ const initialValues = {
 const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const [ formValues, setFormValues ] = useState(initialValues)
+  const [ formValues, setFormValues ] = useState(initialValues);
+  const [ error, setErrors ] = useState("");
   const history = useHistory();
 
   const submit = (e) => {
     e.preventDefault()
+    if(formValues.username === "Lambda School" && formValues.password === "i<3Lambd4"){
       axios.post("http://localhost:5000/api/login", formValues)
       .then(res=>{
         localStorage.setItem("token", res.data.payload)
@@ -23,20 +25,24 @@ const Login = () => {
       .catch(err=>{
         console.log("error with login:", err.response)
       });
-    setFormValues(initialValues);
+      setFormValues(initialValues);
+
+    }else {
+      setErrors("Wrong username or password")
+    }
   }
   
   const change = (e) => {
     setFormValues({...formValues, [e.target.name]: e.target.value})
   }
 
-  const error = "";
-  //replace with error state
+
 
   return (
     <div>
       <h1>Welcome to the Bubble App!</h1>
-        <form onSubmit={submit} data-testid="loginForm" className="login-form">
+      <div data-testid="loginForm" className="login-form">
+        <form onSubmit={submit} >
           <label>
             Username
             <input 
@@ -57,7 +63,7 @@ const Login = () => {
           </label>
           <button>Sign in</button>
         </form>
-
+      </div>
       <p data-testid="errorMessage" className="error">{error}</p>
     </div>
   );
